@@ -1,0 +1,34 @@
+{
+  "name": "slack-fifeiro",
+  "version": "1.0.0",
+  "description": "A Slackbot to manage the results of FIFA 18 matches in the office",
+  "main": "index.js",
+  "engines": {
+    "node": "9.0.0",
+    "npm": "5.5.1"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patarkf/slack-fifa-leaderboard.git"
+  },
+  "keywords": [
+    "nodejs",
+    "slack",
+    "slackbot",
+    "fifa",
+    "soccer"
+  ],
+  "author": "Patrick Ferreira <paatrickferreira@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patarkf/slack-fifa-leaderboard/issues"
+  },
+  "homepage": "https://github.com/patarkf/slack-fifa-leaderboard#readme",
+  "dependencies": {
+    "slackbots": "^1.1.0"
+  }
+}
