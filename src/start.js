@@ -8,6 +8,7 @@ mongoose.connection.on('error', (err) => {
   console.error(err.message);
 });
 require('./models/Match');
+require('./models/LeaderBoard');
 
 
 const app = require('./app');
