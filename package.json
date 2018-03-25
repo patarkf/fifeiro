@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node ./src/start.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./test/"
   },
   "repository": {
     "type": "git",
@@ -36,5 +36,8 @@
     "express-validator": "^5.0.3",
     "mongoose": "^5.0.10",
     "mongoose-mongodb-errors": "0.0.2"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3"
   }
 }
