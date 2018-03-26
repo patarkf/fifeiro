@@ -19,8 +19,8 @@ exports.create = async (req, res, next) => {
   const homeUserFacts = await LeaderBoard.findOneOrCreate(match.homeSlackId);
   const awayUserFacts = await LeaderBoard.findOneOrCreate(match.awaySlackId);
 
-  const updatedHomeUserFacts = updateHomeUserFacts(homeUserFacts, match);
-  const updatedAwayUserFacts = updateAwayUserFacts(awayUserFacts, match);
+  const updatedHomeUserFacts = updateUserFacts(homeUserFacts, match.homeScore, match.awayScore);
+  const updatedAwayUserFacts = updateUserFacts(awayUserFacts, match.awayScore, match.homeScore);
 
   await LeaderBoard.update({ _id: homeUserFacts._id }, { $set: updatedHomeUserFacts});
   await LeaderBoard.update({ _id: awayUserFacts._id }, { $set: updatedAwayUserFacts});

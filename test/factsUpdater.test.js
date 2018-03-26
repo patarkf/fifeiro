@@ -1,17 +1,73 @@
 const facts = require('../src/utils/factsUpdater');
 
-test('checks if user has won the match', () => {
-  expect(facts.isWin(2, 1)).toBe(true);
+describe('Should correctly check and assign match results on leaderboard', () => {
+  it('works when user has won the match', () => {
+    expect(facts.isWin(2, 1)).toBeTruthy();
+  });
+  
+  it('works when match has been a draw', () => {
+    expect(facts.isDraw(2, 2)).toBeTruthy();
+  });
+  
+  it('works when user has loss the match', () => {
+    expect(facts.isLoss(1, 2)).toBeTruthy();
+  });
+
+  it('works when increasing facts numbers', () => {
+    expect(facts.updateScore(4)).toBe(5);
+  });
 });
 
-test('checks if match has been a draw', () => {
-  expect(facts.isDraw(2, 2)).toBe(true);
-});
+describe('Should update user leaderboard facts correctly', () => {
+  const defaultUserFacts = {
+    playedMatches: 0,
+    won: 0,
+    loss: 0,
+    draw: 0,
+  };
 
-test('checks if user has loss the match', () => {
-  expect(facts.isLoss(1, 2)).toBe(true);
-});
+  test('works when user has won', () => {
+    const match = {homeScore: 3, awayScore: 2};
+  
+    const expectedUserFacts = {
+      playedMatches: 1,
+      won: 1,
+      loss: 0,
+      draw: 0,
+    };
+  
+    const resp = facts.updateUserFacts(defaultUserFacts, match.homeScore, match.awayScore);
+  
+    expect(resp).toMatchObject(expectedUserFacts);
+  });
 
-test('checks if facts numbers are being correctly increased', () => {
-  expect(facts.updateScore(4)).toBe(5);
-});
+  test('works when match has been a draw', () => {
+    const match = {homeScore: 3, awayScore: 3};
+  
+    const expectedUserFacts = {
+      playedMatches: 1,
+      won: 0,
+      loss: 0,
+      draw: 1,
+    };
+  
+    const resp = facts.updateUserFacts(defaultUserFacts, match.homeScore, match.awayScore);
+  
+    expect(resp).toMatchObject(expectedUserFacts);
+  });
+
+  test('works when user has loss', () => {
+    const match = {homeScore: 2, awayScore: 3};
+  
+    const expectedUserFacts = {
+      playedMatches: 1,
+      won: 0,
+      loss: 1,
+      draw: 0,
+    };
+  
+    const resp = facts.updateUserFacts(defaultUserFacts, match.homeScore, match.awayScore);
+  
+    expect(resp).toMatchObject(expectedUserFacts);
+  });
+})
