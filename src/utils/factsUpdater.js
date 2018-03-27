@@ -1,5 +1,5 @@
 const points = {
-  won: 3,
+  win: 3,
   draw: 1,
   loss: 0
 };
@@ -16,11 +16,17 @@ const updateGoalsScore = (currentScoredGoals, matchScoredGoals) => currentScored
 
 const updateGoalsConceded = (currentConcededGoals, matchConcededGoals) => currentConcededGoals + matchConcededGoals;
 
-const updateGoalsDifference = (matchScoredGoals, matchConcededGoals, {goalsScored, goalsConceded}) => {
+const updateGoalsDifference = (matchScoredGoals, matchConcededGoals, { goalsScored, goalsConceded }) => {
   const currentScoredGoals = matchScoredGoals + goalsScored;
   const currentConcededGoals = matchConcededGoals + goalsConceded;
   
   return currentScoredGoals - currentConcededGoals;
+};
+
+const updatePoints = (userScore, opponentScore, currentPoints) => {
+  if (isWin(userScore, opponentScore)) return currentPoints + points.win;
+  if (isDraw(userScore, opponentScore)) return currentPoints + points.draw;
+  if (isLoss(userScore, opponentScore)) return currentPoints + points.loss;
 };
 
 const updateUserFacts = (user, userScore, opponentScore) => {
@@ -29,9 +35,10 @@ const updateUserFacts = (user, userScore, opponentScore) => {
     won: isWin(userScore, opponentScore) ? updateScore(user.won) : user.won,
     loss: isLoss(userScore, opponentScore) ? updateScore(user.loss) : user.loss,
     draw: isDraw(userScore, opponentScore) ? updateScore(user.draw) : user.draw,
+    points: updatePoints(userScore, opponentScore, user.points),
     goalsScored: updateGoalsScore(user.goalsScored, userScore),
     goalsConceded: updateGoalsConceded(user.goalsConceded, opponentScore),
-    goalsDifference: updateGoalsDifference(userScore, opponentScore, user)
+    goalsDifference: updateGoalsDifference(userScore, opponentScore, user),
   };
 };
 
