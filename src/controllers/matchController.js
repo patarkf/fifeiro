@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Match = mongoose.model('Match');
 const LeaderBoard = mongoose.model('LeaderBoard');
 const { getNormalizedMatch } = require('../utils/normalizer');
-const { updateHomeUserFacts, updateAwayUserFacts} = require('../utils/factsUpdater');
+const { updateUserFacts} = require('../utils/factsUpdater');
 
 /**
  * Create a match between two players (slack users) and
