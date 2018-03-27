@@ -38,6 +38,10 @@ const leaderBoardSchema = new Schema({
     type: Number,
     default: 0
   },
+  position: {
+    type: Number,
+    default: 0
+  },
   createdAt: {
     type: Date,
     default: Date.now
