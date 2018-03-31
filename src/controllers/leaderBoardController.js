@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const LeaderBoard = mongoose.model('LeaderBoard');
-const { getMessage } = require('../formatters/leaderBoard');
+const { getFormattedMessage } = require('../messages/leaderBoard');
 
 /**
  * Show leaderboard data, which contains all user facts
@@ -12,5 +12,5 @@ const { getMessage } = require('../formatters/leaderBoard');
  */
 exports.list = async (req, res) => {
   const users = await LeaderBoard.find({}).sort('-points');
-  res.send(getMessage(users));
+  res.send(getFormattedMessage(users));
 };
