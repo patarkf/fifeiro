@@ -11,9 +11,8 @@ const { getFormattedMessage } = require('../messages/match');
  * 
  * @param {*} req 
  * @param {*} res 
- * @param {*} next 
  */
-exports.create = async (req, res, next) => {
+exports.create = async (req, res) => {
   const normalizedMatch = getNormalizedMatch(req.body);
   const match = await new Match(normalizedMatch).save();
 
