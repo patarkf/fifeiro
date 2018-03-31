@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
+
 const Match = mongoose.model('Match');
 const LeaderBoard = mongoose.model('LeaderBoard');
 const { getNormalizedMatch } = require('../utils/normalizer');
-const { updateUserFacts} = require('../utils/factsUpdater');
+const { updateUserFacts } = require('../utils/factsUpdater');
 const { getFormattedMessage } = require('../messages/match');
 
 /**
  * Create a match between two players (slack users) and
  * store their scores.
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 exports.create = async (req, res) => {
   const normalizedMatch = getNormalizedMatch(req.body);
@@ -22,8 +23,8 @@ exports.create = async (req, res) => {
   const updatedHomeUserFacts = updateUserFacts(homeUserFacts, match.homeScore, match.awayScore);
   const updatedAwayUserFacts = updateUserFacts(awayUserFacts, match.awayScore, match.homeScore);
 
-  await LeaderBoard.update({ _id: homeUserFacts._id }, { $set: updatedHomeUserFacts});
-  await LeaderBoard.update({ _id: awayUserFacts._id }, { $set: updatedAwayUserFacts});
+  await LeaderBoard.update({ _id: homeUserFacts._id }, { $set: updatedHomeUserFacts });
+  await LeaderBoard.update({ _id: awayUserFacts._id }, { $set: updatedAwayUserFacts });
 
   res.send(getFormattedMessage(match));
 };

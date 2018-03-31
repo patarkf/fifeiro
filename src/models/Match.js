@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
-const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
 
 const matchSchema = new Schema({
@@ -9,7 +9,7 @@ const matchSchema = new Schema({
   homeScore: Number,
   awaySlackId: String,
   awayScore: Number,
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 matchSchema.plugin(mongodbErrorHandler);

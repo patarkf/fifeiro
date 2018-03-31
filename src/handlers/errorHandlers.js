@@ -1,7 +1,5 @@
-exports.catchErrors = (fn) => {
-  return function (req, res, next) {
-    return fn(req, res, next).catch(next);
-  };
+exports.catchErrors = fn => function (req, res, next) {
+  return fn(req, res, next).catch(next);
 };
 
 exports.notFound = (req, res, next) => {
