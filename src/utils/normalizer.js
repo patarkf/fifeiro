@@ -5,17 +5,21 @@
  * @param {*} match
  */
 const getNormalizedMatch = (match) => {
-  const matchFacts = match.text.split('vs').map(fact => fact.trim().split(' '));
+  try {
+    const matchFacts = match.text.split('vs').map(fact => fact.trim().split(' '));
 
-  const [homeSlackId, homeScore] = matchFacts[0];
-  const [awayScore, awaySlackId] = matchFacts[1];
+    const [homeSlackId, homeScore] = matchFacts[0];
+    const [awayScore, awaySlackId] = matchFacts[1];
 
-  return {
-    homeSlackId,
-    homeScore,
-    awaySlackId,
-    awayScore,
-  };
+    return {
+      homeSlackId,
+      homeScore,
+      awaySlackId,
+      awayScore,
+    };
+  } catch (e) {
+    throw new Error('Command could not be parsed. Please, try again.');
+  }
 };
 
 module.exports = {
