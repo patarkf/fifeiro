@@ -56,7 +56,7 @@ const leaderBoardSchema = new Schema({
  * @param {string} userSlackId
  * @returns {Object}
  */
-leaderBoardSchema.statics.findOneOrCreate = async (userSlackId) => {
+leaderBoardSchema.statics.findOneOrCreate = async function(userSlackId) {
   const query = { userSlackId };
   const options = { upsert: true, setDefaultsOnInsert: true, new: true };
   return this.findOneAndUpdate(query, { userSlackId }, options);
