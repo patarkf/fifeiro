@@ -22,6 +22,7 @@ const getFormattedMessage = ({ homeSlackId, awaySlackId }) => ({
  * @see https://api.slack.com/docs/message-formatting
  */
 const getErrorMessage = (message) => ({
+  response_type: "in_channel",
   text: `Oops! Something went wrong: Please, check it out: \`${message}\` `,
   color: 'bad',
 });

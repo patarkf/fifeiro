@@ -116,6 +116,7 @@ const getUserLeaderBoardRow = (user, userPosition) => ({
  */
 const getFormattedMessage = (users) => {
   const formattedMessage = {
+    response_type: "in_channel",
     text: `Leaderboard ${emojis.trophy} ${emojis.fire}`,
     attachments: [],
   };
