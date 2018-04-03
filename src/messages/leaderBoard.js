@@ -70,7 +70,7 @@ const getColor = (userPosition) => {
  * @param {int} userPosition
  * @returns {Object}
  */
-const getUserLeaderBoardRow = (user, userPosition) => ({
+const getDetailedUserLeaderBoardRow = (user, userPosition) => ({
   author_name: `#${userPosition} - ${user.userSlackId} ${getEmoji(userPosition)}`,
   color: getColor(userPosition),
   fallback: 'Leaderboard info',
@@ -106,6 +106,19 @@ const getUserLeaderBoardRow = (user, userPosition) => ({
 });
 
 /**
+ * Add and format facts for each leaderboard user based on its numbers.
+ *
+ * @param {Object} user
+ * @param {int} userPosition
+ * @returns {Object}
+ */
+const getSimpleUserLeaderBoardRow = (user, userPosition) => ({
+  author_name: `#${userPosition} - ${user.userSlackId} ${getEmoji(userPosition)}`,
+  color: getColor(userPosition),
+  fallback: 'Leaderboard info',
+});
+
+/**
  * Slack response message when user wants to see the current
  * leaderboard facts.
  *
@@ -114,16 +127,19 @@ const getUserLeaderBoardRow = (user, userPosition) => ({
  *
  * @see https://api.slack.com/docs/message-attachments
  */
-const getFormattedMessage = (users) => {
+const getFormattedMessage = (users, isDetailed = false) => {
   const formattedMessage = {
-    response_type: "in_channel",
+    response_type: 'in_channel',
     text: `Leaderboard ${emojis.trophy} ${emojis.fire}`,
     attachments: [],
   };
 
   users.forEach((user, key) => {
     const userPosition = key + 1;
-    const userFacts = getUserLeaderBoardRow(user, userPosition);
+    const userFacts = isDetailed ?
+      getDetailedUserLeaderBoardRow(user, userPosition) :
+      getSimpleUserLeaderBoardRow(user, userPosition);
+
     formattedMessage.attachments.push(userFacts);
   });
 
@@ -134,5 +150,6 @@ module.exports = {
   getEmoji,
   getColor,
   getFormattedMessage,
-  getUserLeaderBoardRow,
+  getDetailedUserLeaderBoardRow,
+  getSimpleUserLeaderBoardRow,
 };
