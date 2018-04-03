@@ -41,7 +41,7 @@ const getLeaderBoardParams = (leaderBoard) => {
     }
 
     if (!acceptedParams.includes(leaderBoard.text)) {
-      throw new Error(`${leaderBoard.text} is not an acceptable parameter.`);
+      throw new Error(`"${leaderBoard.text}" is not an acceptable parameter.`);
     }
 
     return true;
